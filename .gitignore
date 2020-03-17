@@ -26,3 +26,10 @@ cmake_install.cmake
 # MacOS
 .DS_Store
 .idea/
+
+build/java-desktop/build
+build/java-desktop/.gradle
+build/bin
+build/lib
+build/buildinfo.hpp
+build/compile_commands.json

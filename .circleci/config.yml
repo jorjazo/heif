@@ -48,3 +48,6 @@ jobs:
 
       - store_artifacts:
           path: ws/build/java-desktop/build/libs
+      - store_artifacts:
+          path: ws/build//lib/libheifjni.so
+
