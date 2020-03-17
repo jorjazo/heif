@@ -25,7 +25,8 @@ jobs:
       - checkout
 
       - run: |
-             ls $CIRCLE_WORKING_DIRECTORY
+             pwd
+             ls
              cd $CIRCLE_WORKING_DIRECTORY/build
              cmake ../srcs
              cmake --build .
