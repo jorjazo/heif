@@ -47,4 +47,4 @@ jobs:
              gradle build
 
       - store_artifacts:
-          path: ws/build/lib/java-desktop
+          path: ws/build/java-desktop/build/libs
