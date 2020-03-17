@@ -1,10 +1,5 @@
 version: 2.1
 
-executors:
-  docker-builder:
-    docker:
-      - image: 'docker.io/jorjazo/debian-build-env:latest'
-
 workflows:
   build:
     jobs:
@@ -15,7 +10,9 @@ workflows:
 
 jobs:
   build-lib:
-    executor: docker-builder
+    executor:
+      docker:
+        - image: 'docker.io/jorjazo/debian-build-env:latest'
 
     environment:
       JVM_OPTS: -Xmx3200m
@@ -39,15 +36,17 @@ jobs:
             - srcs
             
   build-jar:
-    executor: docker-builder
+    executor:
+      docker:
+        - image: 'circleci/openjdk:13-jdk-buster'
     
     steps:
       - attach_workspace:
           at: ./ws
 
       - run: |
-             cd build/java-desktop
+             cd ws/build/java-desktop
              gradle build
 
       - store_artifacts:
-          path: build/lib/java-desktop
+          path: ws/build/lib/java-desktop
