@@ -1,0 +1,51 @@
+version: 2.1
+
+executors:
+  docker-builder:
+    docker:
+      - image: 'docker.io/jorjazo/debian-build-env:latest'
+
+workflows:
+  build:
+    jobs:
+      - build-lib
+      - build-jar:
+          requires:
+            - build-lib
+
+jobs:
+  build-lib:
+    executor: docker-builder
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+      - checkout
+
+      - run:
+          working_directory: $CIRCLE_WORKING_DIRECTORY/build
+          command: cmake ../srcs
+      - run:
+          working_directory: $CIRCLE_WORKING_DIRECTORY/build
+          command: cmake --build .
+      
+      - store_artifacts:
+          path: build/lib
+      
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+            - srcs
+            
+  build-lib:
+    executor: docker-builder
+    
+    steps:
+      - attach_workspace:
+          at: ./ws
+      - run:
+          working_directory: $CIRCLE_WORKING_DIRECTORY/build/java-desktop
+          command: gradle build
