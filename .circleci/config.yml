@@ -10,9 +10,8 @@ workflows:
 
 jobs:
   build-lib:
-    executor:
-      docker:
-        - image: 'docker.io/jorjazo/debian-build-env:latest'
+    docker:
+      - image: 'cppbuild/alpine-gxx'
 
     environment:
       JVM_OPTS: -Xmx3200m
@@ -36,9 +35,8 @@ jobs:
             - srcs
             
   build-jar:
-    executor:
-      docker:
-        - image: 'circleci/openjdk:13-jdk-buster'
+    docker:
+      - image: 'circleci/openjdk:13-jdk-buster'
     
     steps:
       - attach_workspace:
