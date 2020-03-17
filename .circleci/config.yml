@@ -40,7 +40,7 @@ jobs:
             - build
             - srcs
             
-  build-lib:
+  build-jar:
     executor: docker-builder
     
     steps:
