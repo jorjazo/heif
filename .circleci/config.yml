@@ -25,9 +25,9 @@ jobs:
       - checkout
 
       - run: |
-        cd $CIRCLE_WORKING_DIRECTORY/build
-        cmake ../srcs
-        cmake --build .
+             cd $CIRCLE_WORKING_DIRECTORY/build
+             cmake ../srcs
+             cmake --build .
       
       - store_artifacts:
           path: build/lib
@@ -46,8 +46,8 @@ jobs:
           at: ./ws
 
       - run: |
-        cd $CIRCLE_WORKING_DIRECTORY/build/java-desktop
-        gradle build
+             cd $CIRCLE_WORKING_DIRECTORY/build/java-desktop
+             gradle build
 
       - store_artifacts:
           path: build/lib/java-desktop
